@@ -44,5 +44,15 @@ def get_movie_by_id(id: int):
 
 #query parameter
 
+@app.get("/api/movies/", tags=["Movies"])
+def get_movies_by_genre(genre: str):
+    genre = genre.capitalize()
+    results = []
+    for movie in movies:
+        if(movie["genres"].count(genre) > 0):
+            results.append(movie)
 
+    if len(results) == 0:
+        return {"Error": "Genre not found"}
+    return results
     
