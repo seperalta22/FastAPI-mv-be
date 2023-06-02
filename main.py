@@ -8,16 +8,19 @@ app.description = "This is my first API with FastAPI"
 
 movies = [
     {
+        "id": 1,
         "name": "The Shawshank Redemption",
         "casts": ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
         "genres": ["Drama"]
     },
     {
+        "id": 2,
         "name": "The Godfather ",
         "casts": ["Marlon Brando", "Al Pacino", "James Caan", "Diane Keaton"],
         "genres": ["Crime", "Drama"]
     },
     {
+        "id": 3,
         "name": "The Dark Knight",
         "casts": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
         "genres": ["Action", "Crime", "Drama"]
@@ -31,4 +34,15 @@ def message():
 @app.get("/api/movies", tags=["Movies"])
 def get_movies():
     return movies
+
+@app.get("/api/movies/{id}", tags=["Movies"])
+def get_movie_by_id(id: int):
+    for movie in movies:
+        if(movie["id"] == id):
+            return movie
+    return {"Error": "Movie not found"}
+
+#query parameter
+
+
     
