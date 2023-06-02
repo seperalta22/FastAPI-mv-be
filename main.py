@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import Body, FastAPI
 from fastapi.responses import HTMLResponse
 
 app= FastAPI()
@@ -56,3 +56,18 @@ def get_movies_by_genre(genre: str):
         return {"Error": "Genre not found"}
     return results
     
+@app.post("/api/movies", tags=["Movies"])
+def create_movie(
+    id: int = Body(), 
+    name: str= Body(), 
+    casts: list = Body(), 
+    genres: list = Body()
+):
+    new_movie = {
+        "id": id,
+        "name": name,
+        "casts": casts,
+        "genres": genres
+    }
+    movies.append(new_movie)
+    return new_movie
