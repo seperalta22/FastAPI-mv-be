@@ -4,5 +4,5 @@ $branchName = $args[2]
 
 Set-Location -Path $projectPath
 git add .
-git commit -m $commitMessage
+git commit -m "`"$commitMessage`""
 git push origin $branchName
