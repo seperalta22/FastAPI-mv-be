@@ -83,3 +83,11 @@ def update_movie(id: int, name: str = Body(None), casts: list = Body(None), genr
             return movie
     return {"Error": "Movie not found"}
 
+
+@app.delete("/api/movies/{id}", tags=["Movies"])
+def delete_movie(id: int):
+    for movie in movies:
+        if(movie["id"] == id):
+            movies.remove(movie)
+            return {"Message": "Movie deleted successfully"}
+    return {"Error": "Movie not found"}
