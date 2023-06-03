@@ -17,6 +17,7 @@ config/local/
 .DS_Store
 
 bitacora.md
+bitacora-2.md
 
 Makefile
 
