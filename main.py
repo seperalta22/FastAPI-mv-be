@@ -3,10 +3,16 @@ from fastapi import FastAPI, Query, Path
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
+from jwt_manager import create_token
+
 app= FastAPI()
 app.title = "My First API with FastAPI"
 app.version = "0.0.1"
 app.description = "This is my first API with FastAPI"
+
+class User(BaseModel):
+    username: str
+    password: str
 
 class Movie(BaseModel):
     id: Optional[int] = Field(None, title="ID of the movie", gt=0)
@@ -84,3 +90,11 @@ def delete_movie(id: int):
             movies.remove(movie)
             return {"Message": "Movie deleted successfully"}
     return {"Error": "Movie not found"}
+
+# Login
+
+@app.post("/api/login", tags=["Login"])
+def login(user: User):
+    if(user.username == "admin" and user.password == "admin"):
+        token: str=create_token(user.dict())
+    return {"token": token}
