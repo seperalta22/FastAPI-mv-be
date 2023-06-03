@@ -1,6 +1,7 @@
-from fastapi import Body, FastAPI
-from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
+from typing import Optional
+from fastapi import FastAPI, Query, Path
+from fastapi.responses import HTMLResponse, JSONResponse
+from pydantic import BaseModel, Field
 
 app= FastAPI()
 app.title = "My First API with FastAPI"
@@ -8,10 +9,10 @@ app.version = "0.0.1"
 app.description = "This is my first API with FastAPI"
 
 class Movie(BaseModel):
-    id: int | None
-    name: str
-    casts: list
-    genres: list
+    id: Optional[int] = Field(None, title="ID of the movie", gt=0)
+    name: str = Field(..., title="Name of the movie", min_length=2, max_length=50)
+    casts: list= Field(..., title="Casts of the movie")
+    genres: list = Field(..., title="Genres of the movie")
 
 movies = [
     {
