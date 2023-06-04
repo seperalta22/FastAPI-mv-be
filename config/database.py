@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker  # ??
 from sqlalchemy.ext.declarative import declarative_base
 
 
-sqlite_db_name = "db.sqlite3"
+sqlite_db_name = "../db.sqlite3"
 base_dir = os.path.dirname(os.path.realpath(__file__))
 
 db_url = f"sqlite:///{base_dir}/{sqlite_db_name}"
